@@ -22,13 +22,21 @@ def l1_loss(network_output, gt):
     return torch.abs((network_output - gt)).mean()
 
 
-def l2_loss(network_output, gt, valid_mask):
-    nd = gt.shape[0]
+def l2_loss(network_output, gt, valid_mask=None, fdim=0):
+    if valid_mask is None:
+        # valid mask like gt shape but fdim is 1
+        gt_shape = list(gt.shape)
+        gt_shape[fdim] = 1
+        valid_mask = torch.ones(gt_shape, device=gt.device)
+        
+    nd = gt.shape[fdim]
     loss_value = (((network_output - gt) ** 2 * valid_mask) * valid_mask).sum() / (valid_mask.sum() * nd)
     return loss_value
 
 
-def cosine_loss(network_output, gt, valid_mask, dim=-1):
+def cosine_loss(network_output, gt, valid_mask=None, dim=-1):
+    if valid_mask is None:
+        valid_mask = torch.ones_like(gt)
     valid_mask = valid_mask.mean(dim=dim)
     loss_value = (((1 - F.cosine_similarity(network_output, gt, dim=dim)) * valid_mask)).sum() / valid_mask.sum()
     return loss_value

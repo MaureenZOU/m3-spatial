@@ -160,11 +160,11 @@ def render_set(model_path, name, iteration, views, gaussians, pipeline, scene, b
                     l2_dist[model] = []
                     cosine_dist[model] = []
 
-                if torch.isnan(l2_loss(raw_feature, gt_feature)) or torch.isnan(cosine_loss(raw_feature, gt_feature, dim=-1)):
+                if torch.isnan(l2_loss(raw_feature, gt_feature, fdim=-1)) or torch.isnan(cosine_loss(raw_feature, gt_feature, dim=-1)):
                     print("NaN detected in distance calculation. Skipping this image.")
                     continue
 
-                l2_dist[model] += [l2_loss(raw_feature, gt_feature)]
+                l2_dist[model] += [l2_loss(raw_feature, gt_feature, fdim=-1)]
                 cosine_dist[model] += [cosine_loss(raw_feature, gt_feature, dim=-1)]
             
             torchvision.utils.save_image(
