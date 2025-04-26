@@ -4,10 +4,10 @@ https://github.com/user-attachments/assets/d37ff5c9-d9f0-4a0a-88c0-f80e475176d7
 ## TODO
 - [x] Installation
 - [x] Demo
-- [ ] Dataset
+- [x] Dataset
 - [x] Checkpoint
-- [ ] Training
-- [ ] Inference
+- [x] Training
+- [x] Inference
 
 ## Installation
 * Prepare Conda Environment
@@ -49,8 +49,9 @@ https://github.com/user-attachments/assets/42038d0b-8016-4f98-bf96-9cbae0c79708
 2. http://storage.googleapis.com/gresearch/refraw360/360_v2.zip
 
 * Download data for embedding
-
-Coming Soon...
+| Train |
+|-------|
+| [Link](https://drive.google.com/file/d/17CU8H2kCXF5WL4qEdzE5lLO3T3iivLDn/view) |
 
 * Feature Extraction
 ```sh
@@ -76,7 +77,8 @@ sh run/train.sh # single GPU
 sh run/mtrain.sh # multi GPU
 ```
 
-## Evaluation
+## Evaluation and Demo
 ```sh
-sh run/render_metrics.sh # single GPU
+sh run/eval.sh # single GPU evaluation
+sh run/app.sh # run interactive demo
 ```
